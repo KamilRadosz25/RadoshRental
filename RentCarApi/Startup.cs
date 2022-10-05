@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RentCarApi.Entities;
+using RentCarApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace RentCarApi
             services.AddControllers();
             services.AddScoped<RentalSeeder>();
             services.AddAutoMapper(this.GetType().Assembly);
+            services.AddScoped<IRentalService, RentalService>();
+            services.AddScoped<ICarService, CarService>();
         }
 
 

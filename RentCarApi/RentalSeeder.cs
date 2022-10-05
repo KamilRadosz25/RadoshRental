@@ -31,7 +31,6 @@ namespace RentCarApi
             {
              new Rental()
             {
-                DeliveryPlaceId ="Kraków Lidl Ul Długa",
                 StartDate="20.09.2022",
                 EndDate ="11.10.2022",
                 Price = 3200,
@@ -44,19 +43,16 @@ namespace RentCarApi
                     {
                         Name="BMW"
                     }
-
                 },
-                User = new User()
+                Address = new Address()
                 {
-                    Name= "Adam",
-                    SurName ="Nowak",
-                    UserName="adamanowak",
-                    Password="test123"
+                    City ="Kraków",
+                    Street = "Powstańcow 21",
+                    PostalCode ="31-180"
                 }
             },
             new Rental()
             {
-                DeliveryPlaceId = "Kraków Czyżyny 26",
                 StartDate = "07.08.2022",
                 EndDate = "18.11.2022",
                 Price = 4300,
@@ -70,17 +66,16 @@ namespace RentCarApi
                         Name = "Toyota"
                     }
                 },
-                User = new User()
+                Address = new Address()
                 {
-                    Name= "Paweł",
-                    SurName ="Pliszka",
-                    UserName="pawelpliszka",
-                    Password="test321"
+                    City ="Kraków",
+                    Street = "Długa 65",
+                    PostalCode ="31-520"
                 }
+
             },
             new Rental()
             {
-                DeliveryPlaceId = "Kraków Lidl Ul Długa",
                 StartDate = "29.11.2022",
                 EndDate = "2.12.2022",
                 Price = 4800,
@@ -95,12 +90,11 @@ namespace RentCarApi
                     }
 
                 },
-                User = new User()
+                Address = new Address()
                 {
-                    Name= "Wojciech",
-                    SurName ="Kowalski",
-                    UserName="wojtekowalski",
-                    Password="test231"
+                    City ="Katowice",
+                    Street = "Wiślicka 2",
+                    PostalCode ="30-081"
                 }
 
             }

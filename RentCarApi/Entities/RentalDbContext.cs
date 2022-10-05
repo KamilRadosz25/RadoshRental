@@ -8,21 +8,17 @@ namespace RentCarApi.Entities
     {
         private string _connectionString = @"Server=KAMIL\SQLEXPRESS;Database=RadoshRental;Trusted_Connection=True;";
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<Car> Cars { get; set; }
+        
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .Property(r => r.Name)
-                .IsRequired()
-                .HasMaxLength(25);
 
             modelBuilder.Entity<Rental>()
                 .Property(r => r.StartDate)
                 .IsRequired();
-
             modelBuilder.Entity<Car>()
                 .Property(r => r.Model)
                 .IsRequired()
@@ -31,6 +27,16 @@ namespace RentCarApi.Entities
                 .Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(15);
+            modelBuilder.Entity<Address>()
+                .Property(x => x.City)
+                .IsRequired()
+                .HasMaxLength(25);
+            modelBuilder.Entity<Address>()
+                .Property(x => x.Street)
+                .IsRequired()
+                .HasMaxLength(50);
+
+
 
 
 
