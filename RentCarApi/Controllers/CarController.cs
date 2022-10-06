@@ -20,6 +20,22 @@ namespace RentCarApi.Controllers
             _carService = carService;
         }
 
+        [HttpPut("{id}")]
+        public ActionResult Update([FromBody] UpdateCarDto dto, [FromRoute] int id)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var isUpdated = _carService.Update(id, dto);
+            if(!isUpdated)
+            {
+                return NotFound();
+            }
+            return Ok();
+
+        }
+
         [HttpDelete]
         public ActionResult Delete(int id)
         {

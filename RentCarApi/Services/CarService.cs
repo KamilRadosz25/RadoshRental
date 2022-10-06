@@ -56,5 +56,21 @@ namespace RentCarApi.Services
             _dbContext.SaveChanges();
             return true;
         }
+        public bool Update(int id, UpdateCarDto dto)
+        {
+            var car = _dbContext.Cars
+               .FirstOrDefault(c => c.Id == id);
+            if (car is null) 
+                return false;
+
+            car.Model = dto.Model;
+            car.Hp = dto.Hp;
+            car.Color = dto.Color;
+
+            _dbContext.SaveChanges();
+
+            return true;
+
+        }
     }
 }
