@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RentCarApi.Entities;
+using RentCarApi.Middleware;
 using RentCarApi.Services;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,8 @@ namespace RentCarApi
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IRentalService, RentalService>();
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<ErrorHandlingMiddleware>();
+
         }
 
 
@@ -44,6 +47,7 @@ namespace RentCarApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 

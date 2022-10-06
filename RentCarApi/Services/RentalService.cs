@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using RentCarApi.Entities;
+using RentCarApi.Exceptions;
 using RentCarApi.Models;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,17 +18,21 @@ namespace RentCarApi.Services
 
         public int Create(CreateRentalDto dto);
 
-        public bool Delete(int id);
+        public void Delete(int id);
+
+        public void Update(int id, UpdateRentalDto dto);
     }
     public class RentalService : IRentalService
     {
         private readonly RentalDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<RentalService> _logger;
 
-        public RentalService(RentalDbContext dbContext, IMapper mapper)
+        public RentalService(RentalDbContext dbContext, IMapper mapper, ILogger<RentalService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
         public RentalDto GetById(int id)
         {
@@ -35,7 +42,8 @@ namespace RentCarApi.Services
                 .Include(r => r.Car.Brand)
                 .Include(r => r.Address)
                 .FirstOrDefault(x => x.Id == id);
-            if (rental is null) return null;
+            if (rental is null)
+                throw new NotFoundException("Rental not found");
 
             var result = _mapper.Map<RentalDto>(rental);
             return result;
@@ -61,17 +69,34 @@ namespace RentCarApi.Services
             _dbContext.SaveChanges();
             return rental.Id;
         }
-        public bool Delete(int id)
+        public void Delete(int id)
+        {
+            _logger.LogError($"Restaurant with id : {id} DELETE action invoked");
+
+            var rental = _dbContext
+                .Rentals
+                .FirstOrDefault(x => x.Id == id);
+            if (rental is null)
+                throw new NotFoundException("Rental not found");
+
+            _dbContext.Rentals.Remove(rental);
+            _dbContext.SaveChanges();
+        }
+
+        public void Update(int id, UpdateRentalDto dto)
         {
             var rental = _dbContext
                 .Rentals
                 .FirstOrDefault(x => x.Id == id);
-            if (rental is null) return false;
+            if (rental is null)
+                throw new NotFoundException("Rental not found");
 
-            _dbContext.Rentals.Remove(rental);
+            rental.StartDate = dto.StartDate;
+            rental.EndDate = dto.EndDate;
+            rental.Price = dto.Price;
+
             _dbContext.SaveChanges();
-
-            return true;
         }
+
     }
 }

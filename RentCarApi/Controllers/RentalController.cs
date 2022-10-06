@@ -11,6 +11,8 @@ using System.Linq;
 namespace RentCarApi.Controllers
 {
     [Route("api/rental")]
+    //Reposinble for Validation 
+    [ApiController]
     public class RentalController : ControllerBase
     {
 
@@ -23,37 +25,22 @@ namespace RentCarApi.Controllers
         [HttpPut("{id}")]
         public ActionResult Update([FromBody] UpdateRentalDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-           var isUpdated = _rentalService.Update(id, dto);
-            if(!isUpdated)
-            {
-                return NotFound();
-            }
+            _rentalService.Update(id, dto);
+
             return Ok();
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute]int id)
         {
-            var isDeleted = _rentalService.Delete(id);
-            if (isDeleted)
-            {
-                return NoContent();
-            }
+            _rentalService.Delete(id);
+
             return NotFound();
         }
 
         [HttpPost]
         public ActionResult CreateRental([FromBody] CreateRentalDto dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-              
+        {              
             var id =_rentalService.Create(dto);
 
             return Created($"/api/rental/{id}", null);

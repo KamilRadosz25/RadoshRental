@@ -27,11 +27,8 @@ namespace RentCarApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var isUpdated = _carService.Update(id, dto);
-            if(!isUpdated)
-            {
-                return NotFound();
-            }
+            _carService.Update(id, dto);
+            
             return Ok();
 
         }
@@ -39,15 +36,9 @@ namespace RentCarApi.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            var isDeleted = _carService.Delete(id);
+            _carService.Delete(id);
 
-            if (isDeleted)
-            {
                 return NoContent();
-            }
-
-            return NotFound();
-
         }
 
         [HttpGet]

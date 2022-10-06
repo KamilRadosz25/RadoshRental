@@ -8,9 +8,9 @@ namespace RentCarApi.Services
         int Create(CreateCarDto dto);
         IEnumerable<CarDto> GetAll();
         CarDto GetById(int id);
-        bool Delete(int id);
+        void Delete(int id);
 
-        bool Update(int id, UpdateCarDto dto);
+        void Update(int id, UpdateCarDto dto);
 
 
     }
