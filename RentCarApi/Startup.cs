@@ -33,9 +33,11 @@ namespace RentCarApi
             services.AddControllers();
             services.AddScoped<RentalSeeder>();
             services.AddAutoMapper(this.GetType().Assembly);
+            services.AddScoped<IPackageService, PackageService>();
             services.AddScoped<IRentalService, RentalService>();
             services.AddScoped<ICarService, CarService>();
             services.AddScoped<ErrorHandlingMiddleware>();
+           
 
         }
 

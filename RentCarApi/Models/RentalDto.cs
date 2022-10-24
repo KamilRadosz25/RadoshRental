@@ -1,4 +1,6 @@
-﻿namespace RentCarApi.Models
+﻿using System.Collections.Generic;
+
+namespace RentCarApi.Models
 {
     public class RentalDto
     {
@@ -11,6 +13,8 @@
         public string City { get; set; }
         public string Street { get; set; }
         public string PostalCode { get; set; }
+        public List<PackageDto> Packages { get; set; }
+
 
     }
 }

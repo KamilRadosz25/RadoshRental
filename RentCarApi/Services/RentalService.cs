@@ -56,6 +56,7 @@ namespace RentCarApi.Services
                 .Include(r => r.Car)
                 .Include(r => r.Car.Brand)
                 .Include(r => r.Address)
+                .Include(r=>r.Packages)
                 .ToList();
 
             var rentalsDtos = _mapper.Map<List<RentalDto>>(rentals);

@@ -13,6 +13,8 @@ namespace RentCarApi.Entities
         
         public DbSet<Address> Addresses { get; set; }
 
+        public DbSet<Package> Packages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

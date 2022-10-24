@@ -10,6 +10,7 @@ namespace RentCarApi
         {
             CreateMap<Car, CarDto>()
                 .ForMember(m => m.Brand, c => c.MapFrom(b => b.Brand.Name));
+            CreateMap<Package, PackageDto>();
             CreateMap<CreateCarDto, Car>();
             CreateMap<Rental, RentalDto>()
                 .ForMember(m => m.Model, c => c.MapFrom(s => s.Car.Model))
@@ -22,6 +23,7 @@ namespace RentCarApi
                 .ForMember(m => m.Address, x => x.MapFrom(dto => new Address()
                 { City = dto.City, Street = dto.Street, PostalCode = dto.PostalCode }));
 
+            CreateMap<CreatePackageDto, Package>();
 
         }
 

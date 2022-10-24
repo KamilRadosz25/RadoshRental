@@ -1,4 +1,6 @@
-﻿namespace RentCarApi.Entities
+﻿using System.Collections.Generic;
+
+namespace RentCarApi.Entities
 {
     public class Rental
     {
@@ -13,6 +15,7 @@
         public int CarId { get; set; }
         public int AddressId { get; set; }
 
+        public virtual List<Package> Packages { get; set; }
         public virtual Address Address { get; set; }
         public virtual Car Car { get; set; }
 
